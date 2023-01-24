@@ -1,46 +1,94 @@
+// const playerSelection = getUserInput.toLowerCase();
 
-const  getUserInput = prompt("Enter Your choice");
-let playerSelection =getUserInput.toUpperCase() ;
-const computerSelection = getComputerChoice();
+let pCounter = 0;
+let cCounter = 0;
+let pTotal = 0;
+let cTotal = 0;
+
+//Game call where 5 rounds of game will be played with computer
+
+game();
+
+//game function 
+
+function game() {
+  for (let i = 1; i <= 5; i++) {
+    const playerSelection = prompt("Enter Your choice").toLowerCase();
+    const computerSelection = getComputerChoice();
+
+    console.log("Player selection:", playerSelection);
+    console.log("Computer selection:", getComputerChoice());
+
+    playRound(playerSelection, computerSelection);
+
+
+    console.log("Player Score: ", pCounter);
+    console.log("Computer Score: ", cCounter);
+  }
+ // display winner
+  scoreBoard(pCounter, cCounter);
+}
+
+//Get computer Choice function //
 
 function getComputerChoice() {
-  let compChoice = Math.floor(Math.random() * 3);
+  const compChoice = Math.floor(Math.random() * 3);
 
   switch (compChoice) {
     case 0:
-      return "ROCK";
+      return "rock";
       break;
     case 1:
-      return "PAPER";
+      return "paper";
       break;
     case 2:
-      return "SCISSORS";
+      return "scissors";
     default:
-        return "Invalid entry";
+      return "Invalid entry";
   }
 }
 
-console.log("Computer selection : ",getComputerChoice());
-console.log(playerSelection); 
+//playRound function //
 
-console.log(playRound(playerSelection,computerSelection
-    ));
-
-function playRound(playerSelection, computerSelection){
-
-    if (playerSelection == computerSelection){
-      return "Its a ties";
+function playRound(playerSelection, computerSelection) {
+  if (playerSelection === computerSelection) {
+    alert("Its a Draw!!");
+    pCounter += 0;
+    cCounter += 0;
+  } else if (playerSelection === "rock") {
+    if (computerSelection === "paper") {
+      alert("Computer1 Win!!");
+      cCounter++;
+    } else {
+      alert("Player1 Win!!");
+      pCounter++;
     }
-   else if (playerSelection === "ROCK" && computerSelection === "SCISSORS"){
-       return "You Win"
-   }
-   else if (playerSelection ==="SCISSORS" && computerSelection === "PAPER"){
-       return "You win";
-   }
-   else if (playerSelection === "PAPER"  && computerSelection === "ROCK"){
-       return "You win";
-   }
-   else {
-       return "Computer Win";
-   }
+  } else if (playerSelection === "paper") {
+    if (computerSelection === "scissors") {
+      alert("Computer2 Win!!");
+      cCounter++;
+    } else {
+      alert("Player2 Win!!");
+      pCounter++;
+    }
+  } else if (playerSelection === "scissors") {
+    if (computerSelection === "rock") {
+      alert("Computer3 Win!!");
+      cCounter++;
+    } else {
+      alert("Player3 Win!!");
+      pCounter++;
+    }
+  }
+}
+
+//scoreBoard function //
+function scoreBoard(pCounter, cCounter) {
+  if (pCounter == cCounter) {
+    return "Its a ties!! cheers";
+  } else if (pCounter > cCounter) {
+    alert("Player won the battle!!");
+  } else {
+    alert("Computer won the battle ");
+  }
 }
